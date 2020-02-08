@@ -9,14 +9,14 @@ script:
   - docker run alexanderpadin/test npm test -- --coverage
 
 after_success:
-  - docker build alexanderpadin/multi-client ./client 
-  - docker build alexanderpadin/multi-nginx ./nginx 
-  - docker build alexanderpadin/multi-server ./server 
-  - docker build alexanderpadin/multi-worker ./worker 
+  - docker build -t alexanderpadin/multi-client ./client 
+  - docker build -t alexanderpadin/multi-nginx ./nginx 
+  - docker build -t alexanderpadin/multi-server ./server 
+  - docker build -t alexanderpadin/multi-worker ./worker 
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   - docker push alexanderpadin/multi-client
-  - docker push alexanderpadin/multi-ngin
+  - docker push alexanderpadin/multi-nginx
   - docker push alexanderpadin/multi-server
   - docker push alexanderpadin/multi-worker
